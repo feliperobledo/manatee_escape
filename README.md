@@ -19,6 +19,17 @@ To install project dependencies, run the following from the project root:
 pip install -r requirements-macos.txt
 ```
 
+### Developing
+
+
+#### Formatting
+
+This is all done for you. Simply run the following so that your code follows
+the agreed code convention:
+```
+black src/
+```
+
 
 
 
