@@ -1,7 +1,8 @@
 # import the pygame module, so you can use it
 import pygame
 from resolutions import RES_4_BY_3
-from colors import red, white, light_green
+from colors import light_green
+from utils.math import Point
 
 ASSETS_DIR = "./assets/"
 ART_DIR = "{assets_dir}/art".format(assets_dir=ASSETS_DIR)
@@ -27,15 +28,17 @@ def main():
     # define a variable to control the main loop
     running = True
 
+    player_pos = Point(x=0, y=0)
+
     # main loop
     while running:
         # event handling, gets all event from the event queue
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    screen.fill(red)
+                    player_pos.x -= 50
                 if event.key == pygame.K_RIGHT:
-                    screen.fill(white)
+                    player_pos.x += 50
             # only do something if the event is of type QUIT
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
