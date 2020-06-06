@@ -40,6 +40,10 @@ def main():
                     player_pos.x -= 50
                 if event.key == pygame.K_RIGHT:
                     player_pos.x += 50
+                if event.key == pygame.K_DOWN:
+                    player_pos.y += 50
+                if event.key == pygame.K_UP:
+                    player_pos.y -= 50
             # only do something if the event is of type QUIT
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
