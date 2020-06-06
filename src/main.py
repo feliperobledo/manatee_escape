@@ -1,7 +1,7 @@
 # import the pygame module, so you can use it
 import pygame
 from resolutions import RES_4_BY_3
-from colors import red, white
+from colors import red, white, light_green
 
 ASSETS_DIR = "./assets/"
 ART_DIR = "{assets_dir}/art".format(assets_dir=ASSETS_DIR)
@@ -34,14 +34,14 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     screen.fill(red)
-                    pygame.display.update()
                 if event.key == pygame.K_RIGHT:
                     screen.fill(white)
-                    pygame.display.update()
             # only do something if the event is of type QUIT
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
                 running = False
+        pygame.draw.rect(screen, light_green, (0, 0, 50, 50))
+        pygame.display.update()
 
 
 # run the main function only if this module is executed as the main script
