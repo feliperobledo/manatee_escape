@@ -1,13 +1,14 @@
 # import the pygame module, so you can use it
 import pygame
 from resolutions import RES_4_BY_3
+from colors import red, white
 
-ASSETS_DIR = './assets/'
-ART_DIR = '{assets_dir}/art'.format(assets_dir=ASSETS_DIR)
+ASSETS_DIR = "./assets/"
+ART_DIR = "{assets_dir}/art".format(assets_dir=ASSETS_DIR)
 
 
 def get_art_asset_path(asset_name):
-    return '{base_path}/{asset_name}'.format(base_path=ART_DIR, asset_name=asset_name)
+    return "{base_path}/{asset_name}".format(base_path=ART_DIR, asset_name=asset_name)
 
 
 # define a main function
@@ -30,6 +31,13 @@ def main():
     while running:
         # event handling, gets all event from the event queue
         for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    screen.fill(red)
+                    pygame.display.update()
+                if event.key == pygame.K_RIGHT:
+                    screen.fill(white)
+                    pygame.display.update()
             # only do something if the event is of type QUIT
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
