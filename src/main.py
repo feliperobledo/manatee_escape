@@ -1,7 +1,7 @@
 # import the pygame module, so you can use it
 import pygame
 from resolutions import RES_4_BY_3
-from colors import light_green
+import colors as Colors
 from utils.math import Point
 
 ASSETS_DIR = "./assets/"
@@ -33,6 +33,7 @@ def main():
     # main loop
     while running:
         # event handling, gets all event from the event queue
+        screen.fill(Colors.black)
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
@@ -43,7 +44,7 @@ def main():
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
                 running = False
-        pygame.draw.rect(screen, light_green, (0, 0, 50, 50))
+        pygame.draw.rect(screen, Colors.green, (player_pos.x, player_pos.y, 50, 50))
         pygame.display.update()
 
 
