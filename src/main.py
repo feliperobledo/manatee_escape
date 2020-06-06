@@ -1,5 +1,6 @@
 # import the pygame module, so you can use it
 import pygame
+from resolutions import RES_4_BY_3
 
 ASSETS_DIR = './assets/'
 ART_DIR = '{assets_dir}/art'.format(assets_dir=ASSETS_DIR)
@@ -17,10 +18,10 @@ def main():
     # load and set the logo
     logo = pygame.image.load(get_art_asset_path("logo32x32.png"))
     pygame.display.set_icon(logo)
-    pygame.display.set_caption("minimal program")
+    pygame.display.set_caption("Manatee Escape")
 
     # create a surface on screen that has the size of 240 x 180
-    screen = pygame.display.set_mode((240, 180))
+    screen = pygame.display.set_mode(RES_4_BY_3[0])
 
     # define a variable to control the main loop
     running = True
