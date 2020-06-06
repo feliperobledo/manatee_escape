@@ -1,7 +1,7 @@
 # import the pygame module, so you can use it
 import pygame
 from resolutions import RES_4_BY_3
-import colors as Colors
+import utils.colors as Colors
 from utils.math import Point
 
 ASSETS_DIR = "./assets/"
