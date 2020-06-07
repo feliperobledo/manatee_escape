@@ -13,6 +13,9 @@ class Color:
     def rgba(self):
         return (self.r, self.g, self.b, self.a)
 
+    def __str__(self):
+        return "(r={r}, g={g}, b={b}, a={a})".format(r=self.r, g=self.g, b=self.b, a=self.a)
+
 
 white = Color(r=255, g=255, b=255, a=255)
 red = Color(r=255, g=0, b=0, a=255)
