@@ -3,7 +3,7 @@ import pygame
 from src.resolutions import Dimensions, RES_4_BY_3
 import src.utils.colors as Colors
 from src.utils.math import Point
-from src.gameobject import GameObject
+from src.gameobject import GameObject, PieceFactory, Pieces
 
 ASSETS_DIR = "./assets/"
 ART_DIR = "{assets_dir}/art".format(assets_dir=ASSETS_DIR)
@@ -30,17 +30,37 @@ def main():
     # define a variable to control the main loop
     running = True
 
-    map_rows = 5
-    map_columns = 10
+    map = [
+        ["P", " ", " ", " ", " "],
+        [" ", "R", " ", "R", " "],
+        [" ", " ", "", " ", " "],
+        [" ", "R", " ", "R", " "],
+        [" ", " ", " ", " ", " "],
+    ]
 
-    player = GameObject(
-        position=Point(x=0, y=0),
-        dimensions=Dimensions(
-            width=chosen_resolution.width /  map_columns,
-            height=chosen_resolution.height / map_rows,
-        ),
-        color=Colors.green,
+    map_rows = len(map)
+    map_columns = len(map[0])
+
+    dimensions = Dimensions(
+        width=chosen_resolution.width /  map_columns,
+        height=chosen_resolution.height / map_rows,
     )
+
+    go_list = []
+    for row_index, row_data in enumerate(map):
+        for col_index, col_data in enumerate(row_data):
+            position = Point(
+                x=dimensions.width * col_index,
+                y=dimensions.height * row_index,
+            )
+
+            if col_data == "R":
+                go_list.append(PieceFactory.instantiate(Pieces.ROCK, dimensions, position))
+            elif col_data == " ":
+                pass
+            elif col_data == "P":
+                player = PieceFactory.instantiate(Pieces.PLAYER, dimensions, position)
+
 
     # main loop
     while running:
@@ -60,6 +80,9 @@ def main():
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
                 running = False
+
+        for go in go_list:
+            pygame.draw.rect(screen, go.color.rgb, go.aabb)
 
         pygame.draw.rect(screen, player.color.rgb, player.aabb)
 

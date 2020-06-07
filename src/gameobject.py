@@ -1,6 +1,9 @@
-from resolutions import Dimensions
-from utils.colors import Color, red
-from utils.math.point import Point
+from enum import Enum
+
+
+from src.resolutions import Dimensions
+from src.utils.colors import Color, red, brown, blue, yellow, black, light_green, green
+from src.utils.math.point import Point
 
 
 class GameObject:
@@ -13,4 +16,28 @@ class GameObject:
     def aabb(self):
         return (self.position.x, self.position.y, self.dimensions.width, self.dimensions.height)
 
+
+class Pieces(Enum):
+    ROCK = 0,
+    OCEAN = 1,
+    BOAT = 2,
+    FLOWER = 3,
+    SEAGRASS = 4,
+    PLAYER = 5
+
+
+class PieceFactory:
+    _color_codes = {
+        Pieces.ROCK: brown,
+        Pieces.OCEAN: blue,
+        Pieces.BOAT: red,
+        Pieces.FLOWER: yellow,
+        Pieces.SEAGRASS: light_green,
+        Pieces.PLAYER: green,
+    }
+
+    @staticmethod
+    def instantiate(piece_type, dimensions, position):
+        color = PieceFactory._color_codes[piece_type]
+        return GameObject(position=position, color=color, dimensions=dimensions)
 
