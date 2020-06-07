@@ -1,8 +1,8 @@
 # import the pygame module, so you can use it
 import pygame
-from resolutions import RES_4_BY_3
-import utils.colors as Colors
-from utils.math import Point
+from src.resolutions import RES_4_BY_3
+import src.utils.colors as Colors
+from src.utils.math import Point
 
 ASSETS_DIR = "./assets/"
 ART_DIR = "{assets_dir}/art".format(assets_dir=ASSETS_DIR)
@@ -50,10 +50,3 @@ def main():
                 running = False
         pygame.draw.rect(screen, Colors.green, (player_pos.x, player_pos.y, 50, 50))
         pygame.display.update()
-
-
-# run the main function only if this module is executed as the main script
-# (if you import this as a module then nothing is executed)
-if __name__ == "__main__":
-    # call the main function
-    main()
