@@ -1,6 +1,6 @@
 # import the pygame module, so you can use it
 import pygame
-from src.resolutions import RES_4_BY_3
+from src.resolutions import Dimensions, RES_4_BY_3
 import src.utils.colors as Colors
 from src.utils.math import Point
 
@@ -23,30 +23,38 @@ def main():
     pygame.display.set_caption("Manatee Escape")
 
     # create a surface on screen that has the size of 240 x 180
-    screen = pygame.display.set_mode(RES_4_BY_3[0])
+    chosen_resolution = RES_4_BY_3[0]
+    screen = pygame.display.set_mode(chosen_resolution.raw)
 
     # define a variable to control the main loop
     running = True
 
+    map_rows = 5
+    map_columns = 10
+
     player_pos = Point(x=0, y=0)
+    player_bounds = Dimensions(
+        width=chosen_resolution.width /  map_columns,
+        height=chosen_resolution.height / map_rows,
+    )
 
     # main loop
     while running:
         # event handling, gets all event from the event queue
-        screen.fill(Colors.black)
+        screen.fill(Colors.black.rgb)
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    player_pos.x -= 50
+                    player_pos.x -= player_bounds.width
                 if event.key == pygame.K_RIGHT:
-                    player_pos.x += 50
+                    player_pos.x += player_bounds.width
                 if event.key == pygame.K_DOWN:
-                    player_pos.y += 50
+                    player_pos.y += player_bounds.height
                 if event.key == pygame.K_UP:
-                    player_pos.y -= 50
+                    player_pos.y -= player_bounds.height
             # only do something if the event is of type QUIT
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
                 running = False
-        pygame.draw.rect(screen, Colors.green, (player_pos.x, player_pos.y, 50, 50))
+        pygame.draw.rect(screen, Colors.green.rgb, (player_pos.x, player_pos.y, player_bounds.width, player_bounds.height))
         pygame.display.update()
